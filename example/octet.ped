@@ -1,0 +1,9 @@
+#Kindred_ID	Sample_ID	Paternal_ID	Maternal_ID	Sex	Affected_Status	Project
+K001	1001	1002	1003	1	2	diseaseXYZ
+K001	1002	0	0	1	1	diseaseXYZ
+K001	1003	0	0	2	1	diseaseXYZ
+K001	1004	1002	1003	1	1	diseaseXYZ
+K001	1005	1002	1003	1	1	diseaseXYZ
+K001	1006	1002	1003	1	2	diseaseXYZ
+K001	1007	1002	1003	1	1	diseaseXYZ
+K001	1008	1002	1003	1	1	diseaseXYZ
