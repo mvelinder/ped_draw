@@ -1,7 +1,4 @@
 # ped_draw
-Easy pedigree drawing with Graphviz
-
-## Purpose
 A simple python script to draw pedigrees with Graphviz
 
 ![tmp.png](tmp.png "tmp.png")
