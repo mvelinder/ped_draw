@@ -1,5 +1,5 @@
 # ped_draw
-Simple pedigree drawing with Graphviz
+Easy pedigree drawing with Graphviz
 
 ## Purpose
 A super simple, Python only, way to draw pedigrees with Graphviz
