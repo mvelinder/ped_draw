@@ -2,7 +2,7 @@
 Easy pedigree drawing with Graphviz
 
 ## Purpose
-A super simple, Python only, way to draw pedigrees with Graphviz
+A simple python script to draw pedigrees with Graphviz
 
 ![tmp.png](tmp.png "tmp.png")
 
