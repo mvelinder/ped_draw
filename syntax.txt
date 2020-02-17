@@ -1,1 +1,0 @@
-python ped_to_dot.py example/quartet.ped | dot -T png -o example/quartet.ped.dot.png ; eog example/quartet.ped.dot.png 2&>/dev/null
