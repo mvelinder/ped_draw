@@ -1,5 +1,5 @@
 # ped_draw
-A simple python script to draw pedigrees with Graphviz
+A simple python script to draw pedigrees with graphviz
 
 ![tmp.png](tmp.png "tmp.png")
 
