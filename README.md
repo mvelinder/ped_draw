@@ -8,10 +8,14 @@ A simple python script to draw pedigrees with Graphviz
 
 ## Usage
 Make dot (to stdout):
-`python ped_to_dot.py $PED`
+```
+python ped_to_dot.py $PED
+```
 
 Make dot, png and view:
-`python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png`
+```
+python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
+```
 
 ## Examples
 Examples can be found in examples/
