@@ -26,3 +26,4 @@ Examples can be found in examples/
 - Only works on 2 generation pedigrees (parents and their children)
 - Only works on single families with the same kindred ID, subset your ped file and use /dev/stdin for multiple kindred peds
 - `dev/ped_to_dot_3gen_dev.py` is a work in progress for 3+ generation pedigree drawing
+- Some slightly wonky behavior with 8 or more kids

@@ -1,0 +1,48 @@
+digraph G {
+	edge [dir=none];
+    graph [splines=ortho];
+	"1003" [shape=oval, regular=0, color="black", style="filled" fillcolor="white"];
+	"1002" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1004" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1005" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1007" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1008" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1010" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1012" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1013" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1014" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1016" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1017" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1019" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1020" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1021" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1022" [shape=box, regular=0, color="black", style="filled" fillcolor="white"];
+	"1001" [shape=box, regular=0, color="black", style="filled" fillcolor="grey"];
+	"1006" [shape=box, regular=0, color="black", style="filled" fillcolor="grey"];
+	"1009" [shape=box, regular=0, color="black", style="filled" fillcolor="grey"];
+	"1011" [shape=box, regular=0, color="black", style="filled" fillcolor="grey"];
+	"1015" [shape=box, regular=0, color="black", style="filled" fillcolor="grey"];
+	"1018" [shape=box, regular=0, color="black", style="filled" fillcolor="grey"];
+	"parent_node" [shape=diamond,label="",height=0.01,width=0.01];
+	{rank=same; "1002" -> "parent_node" -> "1003"};
+	"parent_node" -> "1001"
+	"parent_node" -> "1004"
+	"parent_node" -> "1005"
+	"parent_node" -> "1006"
+	"parent_node" -> "1007"
+	"parent_node" -> "1008"
+	"parent_node" -> "1009"
+	"parent_node" -> "1010"
+	"parent_node" -> "1011"
+	"parent_node" -> "1012"
+	"parent_node" -> "1013"
+	"parent_node" -> "1014"
+	"parent_node" -> "1015"
+	"parent_node" -> "1016"
+	"parent_node" -> "1017"
+	"parent_node" -> "1018"
+	"parent_node" -> "1019"
+	"parent_node" -> "1020"
+	"parent_node" -> "1021"
+	"parent_node" -> "1022"
+}
