@@ -11,7 +11,7 @@ python ped_to_dot.py $PED
 or from stdin
 
 ```
-cat $PED | python ped_to_dot.py /dev/stdin
+grep ^kindred01 $PED | python ped_to_dot.py /dev/stdin
 ```
 
 Make dot, png and view:
