@@ -30,6 +30,6 @@ Are in examples/
 ![septet.png](examples/images/septet.png "septet.png")
 
 ## Limitations
-- Does not work with multi-kindred ped files, you must subset using
+- Does not work with multi-kindred ped files, you must subset first
 - Some slightly wonky behavior with 8 or more kids
 - Please add others you find to Issues
