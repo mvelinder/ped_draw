@@ -1,7 +1,6 @@
 # ped_draw
 A simple python script to draw (multi generation!) pedigrees with graphviz
 
-#### 3 generation pedigree
 ![quintet.png](examples/images/quintet.png "quintet.png")
 
 ## Usage
