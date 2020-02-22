@@ -18,7 +18,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 - [python](https://www.python.org/) 2.7.15 or greater
 - to-spec [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input
 - dot/[graphviz](https://graphviz.gitlab.io/)
-- [eog](https://wiki.gnome.org/Apps/EyeOfGnome)
+- [eog](https://wiki.gnome.org/Apps/EyeOfGnome) or otherwise for viewing
 
 ## Examples
 Are in examples/
