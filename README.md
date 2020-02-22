@@ -1,7 +1,8 @@
 # ped_draw
-A simple python script to draw pedigrees with graphviz
+A simple python script to draw pedigrees with graphviz, including multiple generations
 
-![tmp.png](tmp.png "tmp.png")
+![examples/images/septet.png](septet.png "septet.png")
+![examples/images/3gen.png](3gen.png "3gen.png")
 
 ## Usage
 Make dot (to stdout):
@@ -20,10 +21,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 ```
 
 ## Examples
-Examples can be found in examples/
+Are in examples/
 
 ## Limitations
-- Only works on 2 generation pedigrees (parents and their children)
-- Only works on single families with the same kindred ID, subset your ped file and use /dev/stdin for multiple kindred peds
-- `dev/ped_to_dot_3gen_dev.py` is a work in progress for 3+ generation pedigree drawing
 - Some slightly wonky behavior with 8 or more kids
