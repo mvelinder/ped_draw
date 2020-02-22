@@ -23,13 +23,15 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 ## Examples
 Are in examples/
 
-#### 3 generation pedigree
-![3gen.png](examples/images/3gen.png "3gen.png")
-
 #### "septet" pedigree
 ![septet.png](examples/images/septet.png "septet.png")
 
+#### 3 generation pedigree
+![3gen.png](examples/images/3gen.png "3gen.png")
+
+#### 4 generation pedigree
+![4gen.png](examples/images/4gen.png "4gen.png")
+
 ## Limitations
 - Does not work with multi-kindred ped files, you must subset first
-- Some slightly wonky behavior with 8 or more kids
-- Please add others you find to Issues
+- Some slightly wonky behavior with 8 or more children per set of parents
