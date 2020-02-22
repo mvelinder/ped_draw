@@ -39,8 +39,6 @@ affected_female_children_sample_ids = []
 affected_unknown_children_sample_ids = []
 
 parents = []
-dads = {}
-moms = {}
 sample_paternal_maternal = []
 
 # populate lists of individuals
@@ -70,8 +68,6 @@ for i, sample in ped.iterrows():
   elif paternal_id != '0' and maternal_id != '0':
     children_sample_ids.append(sample_id)
     parents.append(paternal_id + "_" + maternal_id)
-    dads.update({sample_id : paternal_id})
-    moms.update({sample_id : maternal_id})
     sample_paternal_maternal.append(sample_id + "_" + paternal_id + "_" + maternal_id)
     if affected_status == 1:
       if sex == 2:
@@ -130,6 +126,7 @@ gen_count = len(parent_sample_ids) - 1
 
 pgen_nodes = []
 cgen_nodes = []
+
 for i in parents:
   pgen_nodes.append("parentnode_" + str(i))
   cgen_nodes.append("childnode_" + str(i))
@@ -150,7 +147,6 @@ for i in pgen_nodes_uniq:
 for i in cgen_nodes_uniq:
   print("\t\"" + i + "\" [shape=circle,label=\"\",height=0.01,width=0.01];")
 
-
 # connect parents
 parents_uniq = []
 for i in parents:
@@ -170,66 +166,5 @@ for i in parents_uniq:
 for i in sample_paternal_maternal:
   isplit = i.split("_")
   print("\t\"childnode_" + str(isplit[1]) + "_" + str(isplit[2]) + "\" -> \"" + str(isplit[0]) + "\"")
-
-
-
-
-
-
-
-
-#for i in children_sample_ids:
-#  print(i)
-
-#for i in gen_nodes:
-#  print(i)
- 
-#for dadkey, dadval in dads.items():
-#  print(dadkey, dadval)
-#  for momkey, momval in moms.items():
-#    print("\t\"parentnode" + dadval + momval + "\"" + " -> \"childnode" + dadval + momval + "\"")
-#  print("sample is: " + k + ", " + "dad is: " + v)
-# draw and connect parent nodes
-#print("\t{rank=same; " + " -> ".join(str(i) for i in parent_sample_ids) + "};")
-
-# draw and connect parent to children
-#for k, v in dads.items():
-#  print(k, v)
-#print("\t{rank=same; " + dads
-
-# get number of children
-#children_count = len(children_sample_ids)
-#tmp_children_count = children_counti
-
-# check if even or odd number of children
-#if children_count %2 == 0:
-# tmp_children_count = children_count + 1
-
-# empty list for children nodes
-#children_nodes = []
-
-# append children nodes to list and print
-#for i in range(children_count):
-# children_nodes.append("children_node" + str(i))
-# print("\t\"children_node" + str(i) +"\" [shape=circle,label=\"\",height=0.01,width=0.01];")
-
-# draw and connect parent nodes
-#print("\t{rank=same; \"" + parent_sample_ids[0] + "\" -> \"parent_node\" -> \"" + parent_sample_ids[1] + "\"};")
-
-# draw children nodes
-#print("\t{rank=same; " + " -> ".join(str(i) for i in children_nodes) + "};")
-
-# connect parent node to middle node
-#print("\t\"parent_node\" -> \"middle_node\"")
-
-# connect children_nodes to children
-#for i, child_sample_id in enumerate(children_sample_ids):
-#        print("\t\"middle_node" + "\" -> \"" + child_sample_id + "\"")
-
-#print("children nodes to draw: " + str(tmp_children_count))
-#print("number of children is: " + str(children_count))
-
-#print("parent sample ids: " + str(parent_sample_ids))
-#print("children sample ids: " + str(children_sample_ids))
 
 print("}")
