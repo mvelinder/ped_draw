@@ -4,7 +4,9 @@ A simple python script to draw (multi generation!) pedigrees with graphviz
 ![quintet.png](examples/images/quintet.png "quintet.png")
 
 ## Install
-`git clone https://github.com/mvelinder/ped_draw.git`
+```
+git clone https://github.com/mvelinder/ped_draw.git
+```
 
 ## Usage
 Make dot (to stdout), can also read from /dev/stdin:
