@@ -36,5 +36,4 @@ Are in examples/
 ![4gen.png](examples/images/4gen.png "4gen.png")
 
 ## Limitations
-- Works with multiple kindreds in the same input ped file, but for best results subset into single kindred prior to input
 - Some slightly wonky lines with 8 or more children per set of parents
