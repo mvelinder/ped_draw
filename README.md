@@ -19,7 +19,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 
 ## Requirements
 - [python](https://www.python.org/) 2.7.15 or greater
-- to-spec [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input
+- to-spec, tab separated [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input
 - dot/[graphviz](https://graphviz.gitlab.io/)
 - [eog](https://wiki.gnome.org/Apps/EyeOfGnome) or otherwise for viewing
 
@@ -36,5 +36,5 @@ Are in examples/
 ![4gen.png](examples/images/4gen.png "4gen.png")
 
 ## Limitations
-- Does not work with multi-kindred ped files, you must subset first
-- Some slightly wonky behavior with 8 or more children per set of parents
+- Works with multiple kindreds in the same input ped file, but for best results subset in single kindreds before inputting
+- Some slightly wonky lines with 8 or more children per set of parents
