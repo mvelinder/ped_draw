@@ -3,7 +3,6 @@
 import sys
 import os
 import pandas
-import math
 
 ped = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
 
