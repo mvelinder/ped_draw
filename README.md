@@ -1,5 +1,5 @@
 # ped_draw
-A simple python script to draw (multi generation!) pedigrees with graphviz
+A simple python script to draw (complex, multi generation!) pedigrees with graphviz
 
 ![quintet.png](examples/images/quintet.png "quintet.png")
 
