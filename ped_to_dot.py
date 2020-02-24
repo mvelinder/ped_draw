@@ -19,25 +19,10 @@ print(header)
 
 # make empty lists
 parent_sample_ids = []
-children_sample_ids = []
-
-unaffected_male_parent_sample_ids = []
-unaffected_female_parent_sample_ids = []
-unaffected_unknown_parent_sample_ids = []
-
-affected_male_parent_sample_ids = []
-affected_female_parent_sample_ids = []
-affected_unknown_parent_sample_ids = []
-
-unaffected_male_children_sample_ids = []
-unaffected_female_children_sample_ids = []
-unaffected_unknown_children_sample_ids = []
-
-affected_male_children_sample_ids = []
-affected_female_children_sample_ids = []
-affected_unknown_children_sample_ids = []
 
 parents = []
+parents_print = []
+childrens_print = []
 sample_paternal_maternal = []
 
 # populate lists of individuals
@@ -52,73 +37,43 @@ for i, sample in ped.iterrows():
     parent_sample_ids.append(sample_id)
     if affected_status == 1:
       if sex == 2:
-        unaffected_female_parent_sample_ids.append(sample_id)
+        parents_print.append("\t\"" + sample_id + "\" " + unaffected_female)
       elif sex == 1:
-        unaffected_male_parent_sample_ids.append(sample_id)
+        parents_print.append("\t\"" + sample_id + "\" " + unaffected_male)
       else:
-        unaffected_unknown_parent_sample_ids.append(sample_id)
+        parents_print.append("\t\"" + sample_id + "\" " + unaffected_unknown)
     elif affected_status == 2:
       if sex == 2:
-        affected_female_parent_sample_ids.append(sample_id)
+        parents_print.append("\t\"" + sample_id + "\" " + affected_female)
       elif sex == 1:
-        affected_male_parent_sample_ids.append(sample_id)
+		parents_print.append("\t\"" + sample_id + "\" " + affected_male)
       else:
-        affected_unknown_parent_sample_ids.append(sample_id)
+        parents_print.append("\t\"" + sample_id + "\" " + affected_unknown)
   elif paternal_id != '0' and maternal_id != '0':
-    children_sample_ids.append(sample_id)
     parents.append(paternal_id + "_" + maternal_id)
     sample_paternal_maternal.append(sample_id + "_" + paternal_id + "_" + maternal_id)
     if affected_status == 1:
       if sex == 2:
-        unaffected_female_children_sample_ids.append(sample_id)
+        childrens_print.append("\t\"" + sample_id + "\" " + unaffected_female)
       elif sex == 1:
-        unaffected_male_children_sample_ids.append(sample_id)
+        childrens_print.append("\t\"" + sample_id + "\" " + unaffected_male)
       else:
-        unaffected_unknown_children_sample_ids.append(sample_id)
+	    childrens_print.append("\t\"" + sample_id + "\" " + unaffected_unknown)
     elif affected_status == 2:
       if sex == 2:
-        affected_female_children_sample_ids.append(sample_id)
+        childrens_print.append("\t\"" + sample_id + "\" " + affected_female)
       elif sex == 1:
-        affected_male_children_sample_ids.append(sample_id)
+        childrens_print.append("\t\"" + sample_id + "\" " + affected_male)
       else:
-        affected_unknown_children_sample_ids.append(sample_id)
+        childrens_print.append("\t\"" + sample_id + "\" " + affected_unknown)
 
-# print lists and drawing text
-for i in unaffected_female_parent_sample_ids:
-  print("\t\"" + str(i) + "\" " + unaffected_female)
+# print parent samples
+for p in parents_print:
+  print(p)
 
-for i in unaffected_male_parent_sample_ids:
-  print("\t\"" + str(i) + "\" " + unaffected_male)
-
-for i in unaffected_unknown_parent_sample_ids:
-  print("\t\"" + str(i) + "\" " + unaffected_unknown)
-
-for i in affected_female_parent_sample_ids:
-  print("\t\"" + str(i) + "\" " + affected_female)
-
-for i in affected_male_parent_sample_ids:
-  print("\t\"" + str(i) + "\" " + affected_male)
-
-for i in affected_unknown_parent_sample_ids:
-  print("\t\"" + str(i) + "\" " + affected_unknown)
-
-for i in unaffected_female_children_sample_ids:
-  print("\t\"" + str(i) + "\" " + unaffected_female)
-
-for i in unaffected_male_children_sample_ids:
-  print("\t\"" + str(i) + "\" " + unaffected_male)
-
-for i in unaffected_unknown_children_sample_ids:
-  print("\t\"" + str(i) + "\" " + unaffected_unknown)
-
-for i in affected_female_children_sample_ids:
-  print("\t\"" + str(i) + "\" " + affected_female)
-
-for i in affected_male_children_sample_ids:
-  print("\t\"" + str(i) + "\" " + affected_male)
-
-for i in affected_unknown_children_sample_ids:
-  print("\t\"" + str(i) + "\" " + affected_unknown)
+# print children samples
+for c in childrens_print:
+  print(c)
 
 # print "generation" nodes
 gen_count = len(parent_sample_ids) - 1

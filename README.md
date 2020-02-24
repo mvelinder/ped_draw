@@ -39,3 +39,4 @@ Are in examples/
 
 ## Limitations
 - Some slightly wonky lines with 8 or more children per set of parents
+- Requires the 6th "phenotype" column in ped file, can be any string
