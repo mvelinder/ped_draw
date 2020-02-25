@@ -36,6 +36,6 @@ Are in [examples/](examples/)
 
 ## Issues
 - If you're getting convoluted lines between parents, try sorting and piping into ped_draw with `sort -k1 -k3 -k4 -g $PED | python ped_to_dot.py /dev/stdin`
-  - [examples/images/unsorted.png](examples/images/unsorted.png) [.ped](examples/unsorted.ped) before sorting, [examples/images/sorted.png](examples/images/sorted.png) [.ped](examples/sorted.ped) after sorting
+  - [unsorted.png](examples/images/unsorted.png) [(.ped)](examples/unsorted.ped) before sorting, [sorted.png](examples/images/sorted.png) [(.ped)](examples/sorted.ped) after sorting
 - Some slightly wonky lines happen with 8 or more children per set of parents (see above)
 - Does not currently support drawing between single parent-child combinations
