@@ -43,4 +43,4 @@ Are in examples/
   - ![unsorted.png](examples/images/unsorted.png "unsorted.png")
   - **after sorting**
   - ![sorted.png](examples/images/sorted.png "sorted.png")
-- Some slightly wonky lines with 8 or more children per set of parents
+- Some slightly wonky lines happen with 8 or more children per set of parents (see above)
