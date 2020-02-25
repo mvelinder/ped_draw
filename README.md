@@ -39,8 +39,8 @@ Are in examples/
 
 ## Limitations
 - For best behavior, put parent-pairs on adjacent rows in ped file, if you're getting convoluted lines between parents, try sorting and piping into ped_draw with `sort -k3 -k4 -g $PED | python ped_to_dot.py /dev/stdin`
-  - **before sorting**
+  - [examples/unsorted.ped](examples/unsorted.ped), before sorting
   - ![unsorted.png](examples/images/unsorted.png "unsorted.png")
-  - **after sorting**
+  - [examples/sorted.ped](examples/sorted.ped), after sorting
   - ![sorted.png](examples/images/sorted.png "sorted.png")
 - Some slightly wonky lines happen with 8 or more children per set of parents (see above)
