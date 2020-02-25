@@ -38,7 +38,7 @@ Are in examples/
 ![4gen.png](examples/images/4gen.png "4gen.png")
 
 ## Limitations
-- For best behavior, put parent-pairs on adjacent rows in ped file, if you're getting convoluted lines between parents, try sorting and piping into ped_draw with `sort -k3 -g $PED | sort -k4 -g | python ped_to_dot.py`
+- For best behavior, put parent-pairs on adjacent rows in ped file, if you're getting convoluted lines between parents, try sorting and piping into ped_draw with `sort -k3 -g $PED | sort -k4 -g | python ped_to_dot.py /dev/stdin`
   - (before sorting)
   - <img src="examples/images/unsorted.png" width=450>
   - (after sorting)
