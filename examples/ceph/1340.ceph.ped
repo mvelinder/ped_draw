@@ -1,0 +1,14 @@
+#kindred	sample	paternal	maternal	sex	affected	phenotype
+1340	8284	0	0	2	1	phenotype
+1340	8285	0	0	1	1	phenotype
+1340	8308	0	0	2	1	phenotype
+1340	8309	0	0	1	1	phenotype
+1340	8307	8285	8284	1	1	phenotype
+1340	1371	8307	8306	1	1	phenotype
+1340	8209	8307	8306	1	1	phenotype
+1340	8283	8307	8306	2	1	phenotype
+1340	8286	8307	8306	1	1	phenotype
+1340	8305	8307	8306	1	1	phenotype
+1340	8336	8307	8306	1	1	phenotype
+1340	8392	8307	8306	2	1	phenotype
+1340	8306	8309	8308	2	1	phenotype

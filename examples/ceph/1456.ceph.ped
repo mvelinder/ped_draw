@@ -1,0 +1,16 @@
+#kindred	sample	paternal	maternal	sex	affected	phenotype
+1456	2035	0	0	2	1	phenotype
+1456	2036	0	0	1	1	phenotype
+1456	2037	0	0	2	1	phenotype
+1456	2038	0	0	1	1	phenotype
+1456	1995	2004	2003	1	1	phenotype
+1456	1996	2004	2003	1	1	phenotype
+1456	1997	2004	2003	2	1	phenotype
+1456	1998	2004	2003	1	1	phenotype
+1456	1999	2004	2003	2	1	phenotype
+1456	2000	2004	2003	1	1	phenotype
+1456	2001	2004	2003	1	1	phenotype
+1456	2002	2004	2003	2	1	phenotype
+1456	42836	2004	2003	1	1	phenotype
+1456	2004	2036	2035	1	1	phenotype
+1456	2003	2038	2037	2	1	phenotype

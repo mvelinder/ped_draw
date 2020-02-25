@@ -1,0 +1,15 @@
+#kindred	sample	paternal	maternal	sex	affected	phenotype
+1346	8358	0	0	1	1	phenotype
+1346	8363	0	0	2	1	phenotype
+1346	8366	0	0	2	1	phenotype
+1346	8367	0	0	1	1	phenotype
+1346	8438	8358	8363	1	1	phenotype
+1346	8365	8367	8366	2	1	phenotype
+1346	1370	8438	8365	1	1	phenotype
+1346	8357	8438	8365	1	1	phenotype
+1346	8359	8438	8365	1	1	phenotype
+1346	8360	8438	8365	2	1	phenotype
+1346	8361	8438	8365	2	1	phenotype
+1346	8362	8438	8365	1	1	phenotype
+1346	8364	8438	8365	2	1	phenotype
+1346	8603	8438	8365	1	1	phenotype
