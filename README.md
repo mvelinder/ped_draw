@@ -21,7 +21,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 
 ## Requirements
 - [python](https://www.python.org/) 2.7.15 or greater
-- to-spec, tab separated [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input
+- to-spec, tab separated [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input, including header line
 - dot/[graphviz](https://graphviz.gitlab.io/)
 - [eog](https://wiki.gnome.org/Apps/EyeOfGnome) or otherwise for viewing
 
@@ -41,3 +41,4 @@ Are in [examples/](examples/)
   - [examples/unsorted.ped](examples/unsorted.ped) after sorting is [examples/sorted.ped](examples/sorted.ped) and looks like this
   - ![sorted.png](examples/images/sorted.png "sorted.png")
 - Some slightly wonky lines happen with 8 or more children per set of parents (see above)
+- Currently does not support drawing between single parent-child relatedness
