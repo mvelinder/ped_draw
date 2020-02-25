@@ -1,0 +1,15 @@
+#family_id	sample_id	paternal_id	maternal_id	sex		affected_status	phenotype
+1408	1017	0	0	2	1	phenotype
+1408	1018	0	0	1	1	phenotype
+1408	1019	0	0	2	1	phenotype
+1408	1020	0	0	1	1	phenotype
+1408	1011	1012	1014	2	1	phenotype
+1408	1012	1020	1019	1	1	phenotype
+1408	1013	1012	1014	1	1	phenotype
+1408	1014	1018	1017	2	1	phenotype
+1408	1015	1012	1014	1	1	phenotype
+1408	1016	1012	1014	1	1	phenotype
+1408	1022	1012	1014	2	1	phenotype
+1408	1025	1012	1014	2	1	phenotype
+1408	1038	1012	1014	2	1	phenotype
+1408	1694	1012	1014	2	1	phenotype
