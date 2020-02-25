@@ -39,6 +39,3 @@ Are in examples/
 
 ## Limitations
 - Some slightly wonky lines with 8 or more children per set of parents
-- Requires the 6th "phenotype" column in ped file, can be any string
-- For best results place parent pairs next to each other in ped file - see examples/parents_together.ped (and examples/images/parents_together.png) versus examples/parents_not_together.ped (and examples/images/parents_not_together.png)
-  - Sorting by paternal and maternal columns can help: `sort -k3 $PED | sort -k4 | python ped_to_dot.py /dev/stdin`
