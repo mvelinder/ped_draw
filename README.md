@@ -35,10 +35,7 @@ Are in [examples/](examples/)
 ![4gen.png](examples/images/4gen.png "4gen.png")
 
 ## Issues
-- For best behavior, put parent-pairs on adjacent rows in ped file, if you're getting convoluted lines between parents, try sorting and piping into ped_draw with `sort -k1 -k3 -k4 -g $PED | python ped_to_dot.py /dev/stdin`
-  - [examples/unsorted.ped](examples/unsorted.ped) before sorting
-  - ![unsorted.png](examples/images/unsorted.png "unsorted.png")
-  - [examples/unsorted.ped](examples/unsorted.ped) after sorting is [examples/sorted.ped](examples/sorted.ped) and looks like this
-  - ![sorted.png](examples/images/sorted.png "sorted.png")
+- If you're getting convoluted lines between parents, try sorting and piping into ped_draw with `sort -k1 -k3 -k4 -g $PED | python ped_to_dot.py /dev/stdin`
+  - [examples/images/unsorted.png](examples/images/unsorted.png) [.ped](examples/unsorted.ped) before sorting, [examples/images/sorted.png](examples/images/sorted.png) [.ped](examples/sorted.ped) after sorting
 - Some slightly wonky lines happen with 8 or more children per set of parents (see above)
-- Currently does not support drawing between single parent-child relatedness
+- Does not currently support drawing between single parent-child combinations
