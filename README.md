@@ -26,7 +26,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 - [eog](https://wiki.gnome.org/Apps/EyeOfGnome) or otherwise for viewing
 
 ## Examples
-Are in examples/
+Are in [examples/](examples/)
 
 #### "septet" pedigree
 ![septet.png](examples/images/septet.png "septet.png")
