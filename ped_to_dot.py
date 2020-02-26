@@ -4,7 +4,8 @@ import sys
 import os
 import pandas
 
-ped = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
+ped_orig = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
+ped = ped_orig.sort_values(by=[list(ped_orig.columns.values)[3]])
 
 header = "digraph G {" "\n""\t" "edge [dir=none];" "\n""\t" "graph [splines=ortho];"
 
