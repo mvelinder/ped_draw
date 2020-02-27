@@ -5,27 +5,44 @@ import os
 import pandas
 
 ped_orig = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
-ped = ped_orig.sort_values(by=[list(ped_orig.columns.values)[3]])
+idx0 = list(ped_orig.columns.values)[0]
+idx2 = list(ped_orig.columns.values)[2]
+idx3 = list(ped_orig.columns.values)[3]
+ped = ped_orig.sort_values(by=[idx0, idx2, idx3])
 
 header = "digraph G {" "\n""\t" "edge [dir=none];" "\n""\t" "graph [splines=ortho];"
 
-unaffected_male = "[shape=box, regular=0, color=\"black\", style=\"filled\" fillcolor=\"white\"];"
-affected_male = "[shape=box, regular=0, color=\"black\", style=\"filled\" fillcolor=\"grey\"];" 
-unaffected_female = "[shape=oval, regular=0, color=\"black\", style=\"filled\" fillcolor=\"white\"];"
-affected_female = "[shape=oval, regular=0, color=\"black\", style=\"filled\" fillcolor=\"grey\"];"
-affected_unknown = "[shape=diamond, regular=0, color=\"black\", style=\"filled\" fillcolor=\"grey\"];"
-unaffected_unknown = "[shape=diamond, regular=0, color=\"black\", style=\"filled\" fillcolor=\"white\"];"
+def getChildCount(sample_id, samples):
+  childCount = 0
+  for s in samples:
+    if s['paternal_id'] == sample_id or s['maternal_id'] == sample_id:
+      childCount += 1
+  return childCount
 
-print(header)
+def getGraphString(gender, affected):
+  shape = "diamond"
+  fillcolor = "white"
+  if gender == 1: shape = "box"
+  elif gender == 2: shape = "oval"
+  if affected == 2: fillcolor = "gray"
+  return '[shape=' + shape + ', regular=0, color="black", style="filled" fillcolor="' + fillcolor + '"];'
+
+def getMate(sample, sampleInfo, mateInfo):
+  if sample['sample_id'] in mateInfo:
+    mateSampleID = mateInfo[sample['sample_id']]
+    for s in sampleInfo:
+      if s['sample_id'] == mateSampleID:
+        return s
+  return None
 
 # make empty lists
 parent_sample_ids = []
 
+mate_info = {}
 parents = []
-parents_print = []
-childrens_print = []
 sample_paternal_maternal = []
 
+sample_info = []
 # populate lists of individuals
 for i, sample in ped.iterrows():
   kindred_id = sample[0]
@@ -34,47 +51,55 @@ for i, sample in ped.iterrows():
   maternal_id = str(sample[3])
   sex = sample[4]
   affected_status = sample[5]
+  graphString = None
+
+  mate_id = None
+  is_parent = False
+  is_child = False
   if paternal_id == '0' and maternal_id == '0':
+    is_parent = True
     parent_sample_ids.append(sample_id)
-    if affected_status == 1:
-      if sex == 2:
-        parents_print.append("\t\"" + sample_id + "\" " + unaffected_female)
-      elif sex == 1:
-        parents_print.append("\t\"" + sample_id + "\" " + unaffected_male)
-      else:
-        parents_print.append("\t\"" + sample_id + "\" " + unaffected_unknown)
-    elif affected_status == 2:
-      if sex == 2:
-        parents_print.append("\t\"" + sample_id + "\" " + affected_female)
-      elif sex == 1:
-		parents_print.append("\t\"" + sample_id + "\" " + affected_male)
-      else:
-        parents_print.append("\t\"" + sample_id + "\" " + affected_unknown)
   elif paternal_id != '0' and maternal_id != '0':
-    parents.append(paternal_id + "_" + maternal_id)
+    is_child = True
     sample_paternal_maternal.append(sample_id + "_" + paternal_id + "_" + maternal_id)
-    if affected_status == 1:
-      if sex == 2:
-        childrens_print.append("\t\"" + sample_id + "\" " + unaffected_female)
-      elif sex == 1:
-        childrens_print.append("\t\"" + sample_id + "\" " + unaffected_male)
-      else:
-	    childrens_print.append("\t\"" + sample_id + "\" " + unaffected_unknown)
-    elif affected_status == 2:
-      if sex == 2:
-        childrens_print.append("\t\"" + sample_id + "\" " + affected_female)
-      elif sex == 1:
-        childrens_print.append("\t\"" + sample_id + "\" " + affected_male)
-      else:
-        childrens_print.append("\t\"" + sample_id + "\" " + affected_unknown)
+    parents.append(paternal_id + "_" + maternal_id)
+    mate_info[paternal_id] = maternal_id
+    mate_info[maternal_id] = paternal_id
+  sample_info.append({
+    "sample_id": sample_id,
+    "graph_string": "\t\"" + sample_id + "\" " + getGraphString(int(sex), int(affected_status)),
+    "gender": sex,
+	"paternal_id": paternal_id,
+	"maternal_id": maternal_id,
+    "is_child": is_child,
+    "is_parent": is_parent,
+    "printed": False
+    })
 
-# print parent samples
-for p in parents_print:
-  print(p)
+# print header
+print(header)
 
-# print children samples
-for c in childrens_print:
-  print(c)
+# print parents first
+for s in sample_info:
+  if not s['is_parent'] or s['printed']: continue # if not a parent or if printed then skip
+  mate = getMate(s, sample_info, mate_info)
+  if mate is not None:
+    if s['gender'] == 1:
+      print(s["graph_string"])
+      print(mate["graph_string"])
+    else:
+      print(mate["graph_string"])
+      print(s["graph_string"])
+    mate['printed'] = True
+  else:
+    print(s["graph_string"])
+  s['printed'] = True
+
+# print children next
+for s in sample_info:
+  if s['is_parent'] or s['printed']: continue # if a parent or if printed skip
+  print(s['graph_string'])
+  s['printed'] = True
 
 # print "generation" nodes
 gen_count = len(parent_sample_ids) - 1
