@@ -69,8 +69,8 @@ for i, sample in ped.iterrows():
     "sample_id": sample_id,
     "graph_string": "\t\"" + sample_id + "\" " + getGraphString(int(sex), int(affected_status)),
     "gender": sex,
-	"paternal_id": paternal_id,
-	"maternal_id": maternal_id,
+    "paternal_id": paternal_id,
+    "maternal_id": maternal_id,
     "is_child": is_child,
     "is_parent": is_parent,
     "printed": False
