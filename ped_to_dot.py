@@ -8,7 +8,7 @@ ped_orig = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
 idx0 = list(ped_orig.columns.values)[0]
 idx2 = list(ped_orig.columns.values)[2]
 idx3 = list(ped_orig.columns.values)[3]
-ped = ped_orig.sort_values(by=[idx0, idx2, idx3])
+ped = ped_orig.sort_values(by=[idx0, idx2, idx3], ascending=False)
 
 header = "digraph G {" "\n""\t" "edge [dir=none];" "\n""\t" "graph [splines=ortho];"
 
@@ -69,8 +69,8 @@ for i, sample in ped.iterrows():
     "sample_id": sample_id,
     "graph_string": "\t\"" + sample_id + "\" " + getGraphString(int(sex), int(affected_status)),
     "gender": sex,
-    "paternal_id": paternal_id,
-    "maternal_id": maternal_id,
+	"paternal_id": paternal_id,
+	"maternal_id": maternal_id,
     "is_child": is_child,
     "is_parent": is_parent,
     "printed": False
@@ -79,6 +79,20 @@ for i, sample in ped.iterrows():
 # print header
 print(header)
 
+
+for s in sample_info:
+  if not s['is_parent'] or s['printed']: continue # if not a parent or if printed then skip
+  mate = getMate(s, sample_info, mate_info)
+  printOrderer = [s]
+  if mate is not None:
+    printOrderer.append(mate)
+
+  printOrderer.sort(key=lambda samp: samp["sample_id"], reverse=True)
+  for samp in printOrderer:
+    print(samp["graph_string"])
+    samp['printed'] = True
+
+'''
 # print parents first
 for s in sample_info:
   if not s['is_parent'] or s['printed']: continue # if not a parent or if printed then skip
@@ -94,7 +108,7 @@ for s in sample_info:
   else:
     print(s["graph_string"])
   s['printed'] = True
-
+'''
 # print children next
 for s in sample_info:
   if s['is_parent'] or s['printed']: continue # if a parent or if printed skip
