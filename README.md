@@ -1,7 +1,7 @@
 # ped_draw
 A simple python script to draw (complex, multi generation!) pedigrees with graphviz
 
-![3gen.png](examples/images/3gen.png "3gen.png")
+![3gen.png](examples/3gen.png "3gen.png")
 
 ## Install
 ```
@@ -29,10 +29,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 Are in [examples/](examples/)
 
 #### "septet" pedigree
-![septet.png](examples/images/septet.png "septet.png")
-
-#### 4 generation pedigree
-![4gen.png](examples/images/4gen.png "4gen.png")
+![septet.png](examples/septet.png "septet.png")
 
 ## Issues
 - Some slightly wonky lines happen with 8 or more children per set of parents
