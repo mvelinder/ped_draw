@@ -1,0 +1,15 @@
+#kindred	sample	paternal	maternal	sex	affected	phenotype
+1447	1749	0	0	2	1	phenotype
+1447	1750	0	0	2	1	phenotype
+1447	1752	0	0	1	1	phenotype
+1447	1753	0	0	1	1	phenotype
+1447	1755	1752	1750	2	1	phenotype
+1447	1754	1753	1749	1	1	phenotype
+1447	1744	1754	1755	2	1	phenotype
+1447	1745	1754	1755	2	1	phenotype
+1447	1746	1754	1755	2	1	phenotype
+1447	1747	1754	1755	1	1	phenotype
+1447	1748	1754	1755	2	1	phenotype
+1447	1751	1754	1755	1	1	phenotype
+1447	4877	1754	1755	1	1	phenotype
+1447	4878	1754	1755	1	1	phenotype

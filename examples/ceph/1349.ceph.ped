@@ -1,0 +1,15 @@
+#kindred	sample	paternal	maternal	sex	affected	phenotype
+1349	8390	0	0	1	1	phenotype
+1349	8391	0	0	2	1	phenotype
+1349	8401	0	0	2	1	phenotype
+1349	8411	0	0	1	1	phenotype
+1349	8398	8390	8391	1	1	phenotype
+1349	8393	8398	8399	2	1	phenotype
+1349	8394	8398	8399	2	1	phenotype
+1349	8395	8398	8399	2	1	phenotype
+1349	8396	8398	8399	2	1	phenotype
+1349	8397	8398	8399	2	1	phenotype
+1349	8464	8398	8399	1	1	phenotype
+1349	8635	8398	8399	1	1	phenotype
+1349	8636	8398	8399	1	1	phenotype
+1349	8399	8411	8401	2	1	phenotype

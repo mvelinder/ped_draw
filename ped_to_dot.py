@@ -3,47 +3,124 @@
 import sys
 import os
 import pandas
+'''
+def getMaleNodes(labels):
+  return '{%s [shape=box, regular=0, color="black", style="filled" fillcolor="white"]};' % ",".join(labels)
 
-ped_orig = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
-idx0 = list(ped_orig.columns.values)[0]
-idx2 = list(ped_orig.columns.values)[2]
-idx3 = list(ped_orig.columns.values)[3]
-ped = ped_orig.sort_values(by=[idx0, idx2, idx3], ascending=False)
+def getFemaleNodes(labels):
+  return '{%s [shape=oval, regular=0, color="black", style="filled" fillcolor="white"]};' % ",".join(labels)
+'''
 
-header = "digraph G {" "\n""\t" "edge [dir=none];" "\n""\t" "graph [splines=ortho];"
+def getInvisibleNodes(prefix, labels):
+  return '{%s [shape=point width=0 style=invis]};' % ",".join([prefix + "_" + sID for sID in labels])
 
-def getChildCount(sample_id, samples):
-  childCount = 0
-  for s in samples:
-    if s['paternal_id'] == sample_id or s['maternal_id'] == sample_id:
-      childCount += 1
-  return childCount
+def getSpouseRank(a, spouseConnection, b):
+  return '{rank=same; %s -- spouse_%s -- %s};' % (a, spouseConnection, b)
 
-def getGraphString(gender, affected):
-  shape = "diamond"
-  fillcolor = "white"
-  if gender == 1: shape = "box"
-  elif gender == 2: shape = "oval"
-  if affected == 2: fillcolor = "gray"
-  return '[shape=' + shape + ', regular=0, color="black", style="filled" fillcolor="' + fillcolor + '"];'
+def getConnection(a, b):
+  return "%s -- %s;" % (a, b)
 
-def getMate(sample, sampleInfo, mateInfo):
-  if sample['sample_id'] in mateInfo:
-    mateSampleID = mateInfo[sample['sample_id']]
-    for s in sampleInfo:
-      if s['sample_id'] == mateSampleID:
-        return s
-  return None
+def getChildConnection(a, b):
+  return "children_%s -- %s;" % (a, b)
 
-# make empty lists
-parent_sample_ids = []
+def getSpouseChildConnectionNode(sr):
+  return "spouse_%s -- children_%s" % (sr, sr)
 
-mate_info = {}
-parents = []
-sample_paternal_maternal = []
+def getSpouseWithAllNodes(sample):
+  sortedSpouseRelationship = [sample, sample.spouse]
+  connectionNode = "%s_%s" % (sortedSpouseRelationship[0].sample_id, sortedSpouseRelationship[1].sample_id)
+  lines = []
+  lines.append(sortedSpouseRelationship[0].getGraphNodeString())
+  lines.append(sortedSpouseRelationship[1].getGraphNodeString())
+  lines.append("{spouse_%s [shape=point width=0 style=invis]};"%connectionNode)
+  lines.append("{rank=same; %s -- spouse_%s -- %s};" %(sortedSpouseRelationship[0].sample_id, connectionNode, sortedSpouseRelationship[1].sample_id))
+  if len(sample.children) > 0:
+    lines.append("{children_%s [shape=point width=0 style=invis]};"%connectionNode)
+    lines.append("spouse_%s -- children_%s" % (connectionNode, connectionNode))
+  return {'lines': lines, 'connectionNode': connectionNode}
 
-sample_info = []
-# populate lists of individuals
+def sortSamplesBySpouse(samples):
+  sortedSampleIDs = []
+  for sampleID in samples:
+    if sampleID in sortedSampleIDs: continue
+    sample = samples[sampleID]
+    if len(sample.parents) == 0:
+      if sample.spouse is not None:
+        sortedSampleIDs = sortedSampleIDs + sample.getSortedSpouseRelationship()
+      else:
+        sortedSampleIDs.append(sampleID)
+
+  for sampleID in samples:
+    if sampleID in sortedSampleIDs: continue
+    sample = samples[sampleID]
+    if sample.spouse is not None:
+      sortedSampleIDs = sortedSampleIDs + sample.getSortedSpouseRelationship()
+    else:
+      sortedSampleIDs.append(sampleID)
+
+  return sortedSampleIDs
+
+
+
+class Sample:
+  def __init__(self, kindred_id, sample_id, paternal_id, maternal_id, sex, affected_status):
+    self.kindred_id = kindred_id
+    self.sample_id = str(sample_id)
+    self.paternal_id = str(paternal_id)
+    self.maternal_id = str(maternal_id)
+    self.sex = sex
+    self.affected_status = affected_status
+    self.spouse = None
+    self.parents = {}
+    self.siblings = {}
+    self.children = {}
+    self.parent_order = []
+
+  def setSpouse(self, spouse):
+    self.spouse = spouse
+
+  def addParent(self, parentSample):
+    self.parents[parentSample.sample_id] = parentSample
+
+  def addChild(self, childSample):
+    self.children[childSample.sample_id] = childSample
+
+  def addSibling(self, siblingSample):
+    self.siblings[siblingSample.sample_id] = siblingSample
+
+  def getSortedSpouseRelationshipSamples(self):
+      if self.spouse is None:
+        return []
+      if self.sex == 1:
+        return [self, self.spouse]
+      else:
+        return [self.spouse, self]
+
+  def getSortedSpouseRelationship(self):
+      if self.spouse is None:
+        return []
+      if self.sex == 1:
+        return [self.sample_id, self.spouse.sample_id]
+      else:
+        return [self.spouse.sample_id, self.sample_id]
+
+  def getSortedSpouseRelationshipString(self):
+    if self.spouse is None:
+      return ''
+    return '_'.join(self.getSortedSpouseRelationship())
+
+  def getGraphNodeString(self):
+    fillcolor = "white"
+    if self.affected_status == 2:
+      fillcolor = "gray"
+    shape = "diamond"
+    if self.sex == 1: shape = "box"
+    elif self.sex == 2: shape = "oval"
+    return '"'+self.sample_id+'" [shape=' + shape + ', regular=0, color="black", style="filled" fillcolor="' + fillcolor + '"];'
+
+
+samples = {}
+ped = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
 for i, sample in ped.iterrows():
   kindred_id = sample[0]
   sample_id = str(sample[1])
@@ -52,113 +129,82 @@ for i, sample in ped.iterrows():
   sex = sample[4]
   affected_status = sample[5]
   graphString = None
+  sample = Sample(kindred_id, sample_id, paternal_id, maternal_id, sex, affected_status)
+  samples[sample_id] = sample
 
-  mate_id = None
-  is_parent = False
-  is_child = False
-  if paternal_id == '0' and maternal_id == '0':
-    is_parent = True
-    parent_sample_ids.append(sample_id)
-  elif paternal_id != '0' and maternal_id != '0':
-    is_child = True
-    sample_paternal_maternal.append(sample_id + "_" + paternal_id + "_" + maternal_id)
-    parents.append(paternal_id + "_" + maternal_id)
-    mate_info[paternal_id] = maternal_id
-    mate_info[maternal_id] = paternal_id
-  sample_info.append({
-    "sample_id": sample_id,
-    "graph_string": "\t\"" + sample_id + "\" " + getGraphString(int(sex), int(affected_status)),
-    "gender": sex,
-	"paternal_id": paternal_id,
-	"maternal_id": maternal_id,
-    "is_child": is_child,
-    "is_parent": is_parent,
-    "printed": False
-    })
+sortedSamples = sorted(samples.values(), key=lambda s: s.sample_id)
+for sample in sortedSamples:
+  sampleID = sample.sample_id
+  if sample.paternal_id != '0' and sample.maternal_id != '0':
+    pat = samples[sample.paternal_id]
+    mat = samples[sample.maternal_id]
+    pat.setSpouse(mat)
+    mat.setSpouse(pat)
+  for tmpSample in sortedSamples:
+    tmpSampleID = tmpSample.sample_id
+    if tmpSampleID == sampleID: continue # don't compare to yourself
+    # add parent child relationships
+    if tmpSample.paternal_id == sampleID or tmpSample.maternal_id == sampleID:
+      sample.addChild(tmpSample)
+      tmpSample.addParent(sample)
+    # add sibling relationships
+    if tmpSample.paternal_id == sample.paternal_id or tmpSample.maternal_id == sample.maternal_id:
+      sample.addSibling(tmpSample)
+      tmpSample.addSibling(sample)
 
-# print header
-print(header)
+#https://stackoverflow.com/questions/27504703/in-graphviz-how-do-i-align-an-edge-to-the-top-center-of-a-node/36953206
+#model after test.dot
+nodes = {'male': [], 'female': [], 'spouse': [], 'children': [], 'children_samples': []}
+for sampleID in sortSamplesBySpouse(samples):
+  sample = samples[sampleID]
+  sortedSpouseRelationship = sample.getSortedSpouseRelationshipString()
+  if len(sortedSpouseRelationship) > 0 and sortedSpouseRelationship not in nodes['spouse']:
+    nodes['spouse'].append(sortedSpouseRelationship)
+    if len(sample.children) > 0:
+      for c in sample.children: nodes['children_samples'].append(samples[c])
+      if sortedSpouseRelationship not in nodes['children']:
+        nodes['children'].append(sortedSpouseRelationship)
 
-
-for s in sample_info:
-  if not s['is_parent'] or s['printed']: continue # if not a parent or if printed then skip
-  mate = getMate(s, sample_info, mate_info)
-  printOrderer = [s]
-  if mate is not None:
-    printOrderer.append(mate)
-
-  printOrderer.sort(key=lambda samp: samp["sample_id"], reverse=True)
-  for samp in printOrderer:
-    print(samp["graph_string"])
-    samp['printed'] = True
-
-'''
-# print parents first
-for s in sample_info:
-  if not s['is_parent'] or s['printed']: continue # if not a parent or if printed then skip
-  mate = getMate(s, sample_info, mate_info)
-  if mate is not None:
-    if s['gender'] == 1:
-      print(s["graph_string"])
-      print(mate["graph_string"])
-    else:
-      print(mate["graph_string"])
-      print(s["graph_string"])
-    mate['printed'] = True
-  else:
-    print(s["graph_string"])
-  s['printed'] = True
-'''
-# print children next
-for s in sample_info:
-  if s['is_parent'] or s['printed']: continue # if a parent or if printed skip
-  print(s['graph_string'])
-  s['printed'] = True
-
-# print "generation" nodes
-gen_count = len(parent_sample_ids) - 1
-
-pgen_nodes = []
-cgen_nodes = []
-
-for i in parents:
-  pgen_nodes.append("parentnode_" + str(i))
-  cgen_nodes.append("childnode_" + str(i))
-
-pgen_nodes_uniq = []
-for i in pgen_nodes:
-  if i not in pgen_nodes_uniq:
-    pgen_nodes_uniq.append(i)
-
-cgen_nodes_uniq = []
-for i in cgen_nodes:
-  if i not in cgen_nodes_uniq:
-    cgen_nodes_uniq.append(i)
-
-for i in pgen_nodes_uniq:
-  print("\t\"" + i + "\" [shape=circle,label=\"\",height=0.01,width=0.01];")
-
-for i in cgen_nodes_uniq:
-  print("\t\"" + i + "\" [shape=circle,label=\"\",height=0.01,width=0.01];")
-
-# connect parents
-parents_uniq = []
-for i in parents:
-  if i not in parents_uniq:
-    parents_uniq.append(i)
-
-for i in parents_uniq:
-  split_parents_uniq = [i.split("_")]
-  for i in split_parents_uniq:
-    print("\t{rank=same; \"" + str(i[0]) + "\" -> \"parentnode_" + str(i[0]) + "_" + str(i[1]) + "\" -> " + "\"" + str(i[1]) + "\"};")
-
-# connect parentnode(s) to childnode(s)
-for i in parents_uniq:
-  print("\t\"parentnode_" + str(i) + "\" -> \"childnode_" + str(i) + "\"")
-
-# connect children to childnodes
-for i in sample_paternal_maternal:
-  isplit = i.split("_")
-  print("\t\"childnode_" + str(isplit[1]) + "_" + str(isplit[2]) + "\" -> \"" + str(isplit[0]) + "\"")
-
+printed = set()
+print("graph G {")
+print("\tedge [dir=none];")
+print("\tgraph [splines=ortho concentrate=true];")
+spousesThatNeedParentConnections = []
+nodes = [s for s in list(samples.values()) if len(s.parents) == 0]
+while len(nodes) > 0:
+  sample = nodes[0]
+  nodes.pop(0)
+  if sample.sample_id in printed: continue
+  sample = samples[sample.sample_id]
+  spouseInfo = ''
+  if sample.spouse is None and sample.sample_id not in printed:
+    print("\t" + sample.getGraphNodeString())
+    printed.add(sample.sample_id)
+  elif sample.spouse is not None:
+    printed.add(sample.spouse.sample_id)
+    for sp in list(sample.spouse.parents.values()): nodes.insert(0, sp)
+    if len(sample.spouse.parents) > 0:
+      spousesThatNeedParentConnections.append(sample.spouse)
+    spouseInfo = getSpouseWithAllNodes(sample)
+    for line in spouseInfo['lines']:
+      if line not in printed:
+        print("\t" + line)
+        printed.add(line)
+  if len(sample.parents) > 0:
+    parentNodeConnectorLabel = "%s_%s" % (sample.parent_order[0].sample_id, sample.parent_order[1].sample_id)
+    childNodeConnector = "children_%s -- %s" % (parentNodeConnectorLabel, sample.sample_id)
+    if childNodeConnector not in printed:
+      print("\t"+childNodeConnector)
+      printed.add(childNodeConnector)
+  for childID in sample.children:
+    child = samples[childID]
+    child.parent_order = [sample, sample.spouse]
+    if any(s.sample_id == child.sample_id for s in nodes) or len(spouseInfo) == 0: continue
+    nodes.insert(0, child)
+for spouse in spousesThatNeedParentConnections:
+  parentNodeConnectorLabel = "%s_%s" % (spouse.parent_order[0].sample_id, spouse.parent_order[1].sample_id)
+  childNodeConnector = "children_%s -- %s" % (parentNodeConnectorLabel, spouse.sample_id)
+  if childNodeConnector not in printed:
+    print("\t"+childNodeConnector)
+    printed.add(childNodeConnector)
 print("}")

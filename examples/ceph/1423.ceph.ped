@@ -1,0 +1,16 @@
+#kindred	sample	paternal	maternal	sex	affected	phenotype
+1423	1333	0	0	1	1	phenotype
+1423	1334	0	0	2	1	phenotype
+1423	1335	0	0	1	1	phenotype
+1423	1336	0	0	2	1	phenotype
+1423	1348	1333	1334	2	1	phenotype
+1423	1343	1335	1336	1	1	phenotype
+1423	1339	1343	1348	1	1	phenotype
+1423	1340	1343	1348	2	1	phenotype
+1423	1341	1343	1348	2	1	phenotype
+1423	1342	1343	1348	2	1	phenotype
+1423	1344	1343	1348	2	1	phenotype
+1423	1345	1343	1348	1	1	phenotype
+1423	1346	1343	1348	1	1	phenotype
+1423	1347	1343	1348	1	1	phenotype
+1423	4876	1343	1348	2	1	phenotype
