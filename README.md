@@ -20,7 +20,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 ```
 
 ### Web tool
-- [https://peddraw.github.io/](peddraw.github.io)
+- [peddraw.github.io](https://peddraw.github.io/)
 
 ## Requirements
 - [python](https://www.python.org/) 2.7.15 or greater
