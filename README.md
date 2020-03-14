@@ -19,6 +19,9 @@ Make dot, save png and view with eog:
 python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 ```
 
+### Web tool
+- [https://peddraw.github.io/](peddraw.github.io)
+
 ## Requirements
 - [python](https://www.python.org/) 2.7.15 or greater
 - to-spec, tab separated [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input, including header line
