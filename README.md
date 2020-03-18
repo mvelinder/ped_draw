@@ -34,6 +34,6 @@ Are in [examples/](examples/)
 #### "septet" pedigree
 ![septet.ped.png](examples/septet.ped.png "septet.ped.png")
 
-## Issues
+## Limitations
 - Some slightly wonky lines happen with 8 or more children per set of parents
 - Does not currently support drawing between single parent-child combinations
