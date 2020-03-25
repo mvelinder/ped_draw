@@ -1,6 +1,8 @@
 # ped_draw
 A simple python script to draw (complex, multi generation!) pedigrees with graphviz
 
+Web version at [peddraw.github.io](https://peddraw.github.io/)
+
 ![3gen.ped.png](examples/3gen.ped.png "3gen.ped.png")
 
 ## Install
@@ -18,9 +20,6 @@ Make dot, save png and view with eog:
 ```
 python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 ```
-
-### Web tool
-- [peddraw.github.io](https://peddraw.github.io/)
 
 ## Requirements
 - [python](https://www.python.org/) 2.7.15 or greater
