@@ -9,7 +9,7 @@ git clone https://github.com/mvelinder/ped_draw.git
 ```
 
 ## Usage
-ped_draw reads in a ped file (from a specified file or from /dev/stdin) and generates a dot file (to stdout). The subsequent dot output can be piped directly to dot/[graphviz](https://graphviz.gitlab.io/) to generate png, svg, pdf, ps, or any other image option available in graphviz.
+ped_draw reads in a ped file (from a specified file or from /dev/stdin) and generates a dot file (to stdout). The subsequent dot output can be piped directly to dot/[graphviz](https://graphviz.gitlab.io/) to generate png, svg, pdf, ps, or any other image option available in the graphviz [documentation](https://www.graphviz.org/pdf/dotguide.pdf).
 
 **Example:**
 Make dot from $PED file (can also read from /dev/stdin) and write to stdout
