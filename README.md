@@ -38,7 +38,7 @@ Numerous examples are in [examples/](examples/)
 #### "septet" pedigree
 ![septet.ped.png](examples/septet.ped.png "septet.ped.png")
 
-## Web version
+## Web App
 ### [peddraw.github.io](https://peddraw.github.io/)
 is a fully featured web app, where users can paste ped files directly into the app or upload ped files from their local machine to generate and display image files
 
