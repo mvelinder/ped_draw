@@ -21,7 +21,7 @@ python ped_to_dot.py $PED | dot -T png -o your.png ; eog your.png
 
 ## Requirements
 - [python](https://www.python.org/) 2.7.15 or greater
-- to-spec, tab separated [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input, including header line
+- to-spec, tab separated [ped](https://gatkforums.broadinstitute.org/gatk/discussion/7696/pedigree-ped-files) file input, including a header line
 - dot/[graphviz](https://graphviz.gitlab.io/)
 - [eog](https://wiki.gnome.org/Apps/EyeOfGnome) or otherwise for viewing
 
