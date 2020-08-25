@@ -2,14 +2,6 @@
 
 import sys
 import os
-import pandas
-'''
-def getMaleNodes(labels):
-  return '{%s [shape=box, regular=0, color="black", style="filled" fillcolor="white"]};' % ",".join(labels)
-
-def getFemaleNodes(labels):
-  return '{%s [shape=oval, regular=0, color="black", style="filled" fillcolor="white"]};' % ",".join(labels)
-'''
 
 def getInvisibleNodes(prefix, labels):
   return '{%s [shape=point width=0 style=invis]};' % ",".join([prefix + "_" + sID for sID in labels])
@@ -120,8 +112,18 @@ class Sample:
 
 
 samples = {}
-ped = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
-for i, sample in ped.iterrows():
+# ped = pandas.read_csv(sys.argv[1],'r', delimiter='\t')
+# for i, sample in ped.iterrows():
+pedFile = open(sys.argv[1],'r')
+headerProcessed = False
+for sampleLine in pedFile:
+  if not headerProcessed:
+    headerProcessed = True
+    continue
+
+  sample = sampleLine.replace('\n', '').split('\t')
+  # sample = sampleSplit # {cols[i] : sampleSplit[i] for i in range(len(cols))}
+
   kindred_id = sample[0]
   sample_id = str(sample[1])
   paternal_id = str(sample[2])
