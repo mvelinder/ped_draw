@@ -128,8 +128,8 @@ for sampleLine in pedFile:
   sample_id = str(sample[1])
   paternal_id = str(sample[2])
   maternal_id = str(sample[3])
-  sex = sample[4]
-  affected_status = sample[5]
+  sex = int(sample[4])
+  affected_status = int(sample[5])
   graphString = None
   sample = Sample(kindred_id, sample_id, paternal_id, maternal_id, sex, affected_status)
   samples[sample_id] = sample
