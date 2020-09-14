@@ -204,7 +204,7 @@ while len(nodes) > 0:
     if any(s.sample_id == child.sample_id for s in nodes) or len(spouseInfo) == 0: continue
     nodes.insert(0, child)
 for spouse in spousesThatNeedParentConnections:
-  parentNodeConnectorLabel = "%s_%s" % (spouse.parent_order[0].sample_id, spouse.parent_order[1].sample_id)
+  parentNodeConnectorLabel = "%s_%s" % (spouse.parent_order[1].sample_id, spouse.parent_order[0].sample_id)
   childNodeConnector = "children_%s -- %s" % (parentNodeConnectorLabel, spouse.sample_id)
   if childNodeConnector not in printed:
     print("\t"+childNodeConnector)
