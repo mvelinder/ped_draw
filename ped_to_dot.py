@@ -116,6 +116,7 @@ samples = {}
 # for i, sample in ped.iterrows():
 pedFile = open(sys.argv[1],'r')
 headerProcessed = False
+sampleNameErrorPrinted = []
 for sampleLine in pedFile:
   if not headerProcessed:
     headerProcessed = True
@@ -128,6 +129,11 @@ for sampleLine in pedFile:
   sample_id = str(sample[1])
   paternal_id = str(sample[2])
   maternal_id = str(sample[3])
+  sampleNames = [sample_id, paternal_id, maternal_id]
+  for sn in sampleNames:
+    if '-' in sn and sn not in sampleNameErrorPrinted:
+      sys.stderr.write('For consistency, your sample name '+sn+' has been replaced with '+sn.replace('-', '')+'.\n')
+      sampleNameErrorPrinted.append(sn)
   sample_id = sample_id.replace('-', '')
   paternal_id = paternal_id.replace('-', '')
   maternal_id = maternal_id.replace('-', '')
