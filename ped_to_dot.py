@@ -128,6 +128,9 @@ for sampleLine in pedFile:
   sample_id = str(sample[1])
   paternal_id = str(sample[2])
   maternal_id = str(sample[3])
+  sample_id = sample_id.replace('-', '')
+  paternal_id = paternal_id.replace('-', '')
+  maternal_id = maternal_id.replace('-', '')
   sex = int(sample[4])
   affected_status = int(sample[5])
   graphString = None
