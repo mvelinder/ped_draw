@@ -42,6 +42,9 @@ Numerous examples are in [examples/](examples/)
 ### [peddraw.github.io](https://peddraw.github.io/)
 is a fully featured web app, where users can paste ped files directly into the app or upload ped files from their local machine to generate and display image files
 
+## Citation
+ped_draw is published in [BMC Bioinformatics](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-020-03917-4)
+
 ## Considerations and Limitations
 - All affected individuals are shaded grey (as per ped file specs), this cannot currently be changed
 - Unaffected sample status can be encoded as 0 or 1 in the input ped file
