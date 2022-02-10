@@ -52,7 +52,7 @@ ped_draw is published in BMC Bioinformatics https://doi.org/10.1186/s12859-020-0
 - Sample sex is indicated as 1 for male and 2 for female (as per ped file specs), samples with a sex of 0 will be drawn as a diamond (also per ped file specs)
 - Drawn relatedness is based on the relatedness described in the child row of the ped file, if a parent sample is described in the child row but not as its own unique row in the ped file, the relatedness will still be drawn, based on the description in the child row
 - If a sample is provided and no relatedness is described between any other samples, the sample will be drawn offset and unconnected to the pedigree
-- In pedigrees with 8 or more children per set of parents there will be overlapping and/or disjointed lines, so it goes
+- In pedigrees with 8 or more children per set of parents there will be overlapping and/or disjointed lines
 - Does not currently support single parent-child combinations
 - Does not currently support monozygotic or dizygotic twins, as this information is not capable of being indicated in a standard ped file
 - Does not currently support drawing genotypes or additional information on specific samples, as this information is not capable of being indicated in a standard ped file
